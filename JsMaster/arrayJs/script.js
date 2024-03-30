@@ -65,7 +65,7 @@ const account1 = {
   const displayMovement = function(movement, sort = false){
     containerMovements.innerHTML =''
 
-    const movs = sort ?  movement.splice().sort((a, b)=>a-b) : movement
+    const movs = sort ?  movement.slice().sort((a, b)=>a-b) : movement
   
     movs.forEach((mov, index)=>{
         const type = mov > 0 ? 'deposit' : 'withdrawal'
@@ -191,7 +191,7 @@ let sorted = false
 btnSort.addEventListener('click', function(e){
   e.preventDefault()
   displayMovement(currentAccount.movements, !sorted)
-  sorted =!sorted
+  sorted =! sorted
 })
 
 labelBalance.addEventListener('click', function(){
