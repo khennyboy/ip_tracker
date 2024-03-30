@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        select{
+            display: none;
+        }
+        .custom-select{
+            width: 200px;
+            margin: 2rem 0 0 2rem;
+            background-color: dodgerblue;
+            font-family: sans-serif;
+        }
+        .notify{
+            position: relative;
+            font-weight: bold;
+        }
+        .notify::after{
+            position: absolute;
+            content: '';
+            border-style: solid;
+            border-width: 6px;
+            border-color: black transparent transparent transparent;
+            width: fit-content;
+            right: 1rem;
+            top: 60%;
+            transform: translateY(-50%);
+        }
+        /* .notify::after .change{
+            border-color: transparent transparent black transparent;
+        } */
+        .custom-select .values, .notify{
+            border-style: solid;
+            border-width: 1px;
+            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            padding: 5px 0 5px 1rem;
+            transition: 0.2s ease-in;
+            cursor: pointer;
+        }
+        .values:hover, .notify:hover{
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .values{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="custom-select" >
+        <select>
+          <option value="1">Audi</option>
+          <option value="2">BMW</option>
+          <option value="3">Citroen</option>
+          <option value="4">Ford</option>
+          <option value="5">Honda</option>
+          <option value="6">Jaguar</option>
+          <option value="7">Land Rover</option>
+          <option value="8">Mercedes</option>
+          <option value="9">Mini</option>
+          <option value="10">Nissan</option>
+          <option value="11">Toyota</option>
+          <option value="12">Volvo</option>
+        </select>
+      </div>
+</body>
+<script>
+    let select = document.querySelector('select')
+    let options = document.querySelectorAll('option')
+    let customSelect = document.querySelector('.custom-select')
+    var optionvalue = []
+    options.forEach((each)=>{
+        optionvalue.push(each.innerHTML)
+    })
+    let createElement = document.createElement('div')
+    for(var i =0 ; i<optionvalue.length; i++){
+        let createElement = document.createElement('div')
+        createElement.innerHTML = optionvalue[i]
+        createElement.setAttribute('class', `values values_${i+1}`)
+        customSelect.insertAdjacentElement('beforeend', createElement)
+    }
+    let notify = document.createElement('div')
+    notify.innerHTML = optionvalue[0]
+    notify.setAttribute('class', 'notify')
+    customSelect.insertAdjacentElement('afterbegin', notify)
+
+    let values = document.querySelectorAll('.values')
+
+    notify.addEventListener('click', function(){
+       values.forEach(each=>{
+        each.classList.toggle('show')
+       })
+    })
+
+    values.forEach((each)=>{
+        each.addEventListener('click', function(){
+            let x = this.innerHTML
+            notify.innerHTML = x
+            notify.click()
+        })
+    })
+
+    document.addEventListener('click', function(e){
+
+        let x = Array.from(document.querySelectorAll('.values'))
+        let y = x.every(each=>{
+            return each.classList.contains('show')
+        })
+        if(y&&e.target !==notify){
+            notify.click()
+        }
+    })
+
+    function name2(){
+        return this.firstname
+    }
+    var x = name2.bind({firstname:'lateef'})
+    console.log(x())
+   
+</script>
+</html>

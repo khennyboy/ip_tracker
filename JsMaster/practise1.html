@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    * {
+        box-sizing: border-box;
+      }
+      
+      #myInput {
+        background-image: url('../css/searchicon.png');
+        background-position: 10px 12px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+      }
+      
+      #myUL {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      
+      #myUL li a {
+        border: 1px solid #ddd;
+        background-color: #f6f6f6;
+        padding: 12px;
+        text-decoration: none;
+        font-size: 18px;
+        color: black;
+        display: block
+      }
+      #myUL li a:first-child{
+        border-top:0;  /*can alternatively use margin top : -1*/
+      }
+      #myUL li:first-child a{
+        border-top: 1px solid #ddd;
+      }
+      
+      #myUL li a:hover:not(.header) {
+        background-color: #eee;
+      }
+      </style>
+      </head>
+      <body>
+    
+      <h2>My Phonebook</h2>  
+      <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+      
+      <ul id="myUL">
+        <li ><a href="#" >Adele</a></li>
+        <li><a href="#">Agnes</a></li>
+      
+        <li><a href="#">Billy</a></li>
+        <li><a href="#">Bob</a></li>
+      
+        <li><a href="#">Calvin</a></li>
+        <li><a href="#">Christina</a></li>
+        <li><a href="#">Cindy</a></li>
+      </ul>
+      <button onclick="sortListDir()">Sort</button>
+
+<p>Click the button to sort the list alphabetically:</p>
+<ul id="id01">
+  <li>Oslo</li>
+  <li>Stockholm</li>
+  <li>Helsinki</li>
+  <li>Berlin</li>
+  <li>Rome</li>
+  <li>Madrid</li>
+</ul>
+<p>Click the button to sort the list numerically:</p>
+<button onclick="sortListDir2()">Sort</button>
+
+<ul id="id02">
+  <li>4</li>
+  <li>3</li>
+  <li>1</li>
+  <li>7</li>
+  <li>1000</li>
+  <li>5234234</li>
+  <li>2</li>
+  <li>100</li>
+</ul>
+
+
+</body>
+<script>
+    function myFunction() {
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.trim().toUpperCase();
+    ul = document.getElementById("myUL");
+    li = ul.getElementsByTagName("li");
+    console.log(li)
+    for(i =0; i <li.length; i++){
+        a = li[i].querySelector('a')
+        txtValue = a.innerHTML;
+        console.log(txtValue)
+       if(txtValue.toUpperCase().indexOf(filter)!=-1){
+        li[i].style.display = 'block'
+       }
+       else{
+        li[i].style.display ='none'
+       }
+    }
+}
+
+
+function sortListDir() {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.getElementById("id01");
+  switching = true;
+ 
+  dir = "asc"; 
+ 
+  while (switching) {
+ 
+    switching = false;
+    b = list.getElementsByTagName("li");
+    for (i = 0; i < (b.length - 1); i++) {
+
+      shouldSwitch = false;
+    
+      if (dir == "asc") {
+        if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+        
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+         
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    
+      switchcount ++;
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+ 
+}
+function sortListDir2() {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.getElementById("id02");
+  switching = true;
+ 
+  dir = "asc"; 
+ 
+  while (switching) {
+ 
+    switching = false;
+    b = list.getElementsByTagName("li");
+    for (i = 0; i < (b.length - 1); i++) {
+
+      shouldSwitch = false;
+    
+      if (dir == "asc") {
+        if (Number(b[i].innerHTML) > Number(b[i + 1].innerHTML)) {
+        
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (Number(b[i].innerHTML)< Number(b[i + 1].innerHTML)) {
+         
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    
+      switchcount ++;
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+ 
+}
+
+</script>
+</html>

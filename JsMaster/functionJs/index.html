@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>function in javascript, Programming is crazy men!</h3>
+</body>
+<script>
+    'use strict';
+    //note: we can also do destrucuring right inside the function declaration
+    function name(obj){
+        console.log(obj.name, obj)
+    }
+    name({
+        name: 'sheriff',
+        level: '300'
+    })
+
+    const bookings = []
+
+    const createBooking = function(flightNum, numPassengers=1, price=199){
+        //ES5
+        // numPassengers = numPassengers || 1
+        // price = price || 199
+        const booking = {
+            flightNum,
+            numPassengers,
+            price
+        }
+        bookings.push(booking)
+        console.log(booking)
+    }
+    createBooking('LH123', 200, 400)
+
+const flights ='LH234'
+const jonas = {
+    name:'Jonas Schmedtmann',
+    passport : 2367287282
+}
+const checkIn = function(flightNum , passenger){
+    flightNum = 'LH999'
+    passenger.name = "Mr" + passenger.name
+    console.log(flightNum)
+    if(passenger.passport == 2367287282){
+        console.log('Checked in')
+    }
+    else{
+        console.log('Wrong passport')
+    }
+}
+checkIn(flights, jonas)
+
+// setting this keyword manually
+const lufthansa = {
+    airline: 'Lufthansa',
+    iatacode: 'LH',
+    bookings:[],            
+    // book: function()
+    book(flightNum, name){
+        console.log(`${name} booked a seat on ${this.airline} flight ${this.iatacode}${flightNum}`)
+    }
+}
+lufthansa.book(239, 'Jonas Schemedmatn')
+lufthansa.book.call({airline:'murtala', iatacode:'EF'}, 240, 'sheriffBaba')
+
+const book = lufthansa.book
+
+function total (...numbers){
+    let x = numbers.reduce((totals, each)=>{
+        return totals+ each
+    }, 200)
+    console.log(x)
+}
+total(2,3,4)
+
+const bookEw = book.bind({
+    airline:'Qatar',
+    iatacode:'EH'
+}, null, 200)
+bookEw('hy') //partial application
+// can also be done like thus
+// bookEw(200, 'code')
+
+const addTax = (rate, value)=>value + value*rate
+
+const addVat = addTax.bind(null, 0.23)
+// addVat = value => value + value* 0.23
+console.log(addVat(100))
+
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0),
+  registerNewAnswer(){
+    const answer = Number( prompt(`${this.question} \n ${this.options.join('\n'
+    )} \n (Write option number)`))
+      //Register answer
+  typeof answer === 'number' && answer< this.answers.length && this.answers[answer]++
+  console.log(this.answers)
+  this.displayResult()
+  this.displayResult('string')
+  },
+    displayResult(type ='array'){
+        if(type ==='array'){
+            console.log(this.answers)
+        }
+        else if(type == 'string'){
+            console.log(`Poll results are ${this.answers.join(', ')}`)
+        }
+    }
+}
+
+// poll.registerNewAnswer()
+
+// we use IIFE for a function a function that needs to only once
+
+// understanding closure 
+const securebooking = function(){
+    let passengerCount =0;
+    return function(){
+        passengerCount++
+        console.log(passengerCount)
+    }
+}
+securebooking()()
+let f ;
+const g = function(){
+    const a =2;
+    return f = function(){
+        console.log(a*23)
+    }
+}
+g()()
+f()
+// ask chatgpt what is causing the error
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+function name(){
+    var x = 23;
+    document.onclick = function(){
+        alert('hello')
+    }
+}
+
+</script>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>OOP object oriented programming</h3>
+</body>
+
+<script>
+    function Person(firstname, lastname){
+        this.firstname = firstname
+        this.lastname = lastname
+    }
+
+    let candidate_1 = new Person('sheriff', 'baba')
+
+    console.dir(candidate_1.constructor)
+
+//  When you define a constructor function in JavaScript, such as Person,
+// JavaScript automatically creates a prototype object for it.
+// This prototype object has a constructor property, which by default
+// points back to the constructor function itself.
+// So, Person.prototype.constructor refers to the constructor function Person.
+    console.dir(Person.prototype.constructor)
+    // Person.constructor refers to the constructor function
+    // that created the Person function itself, which is Function.
+    console.log(Person.constructor)
+
+    console.log(candidate_1.__proto__)
+    console.log(candidate_1.__proto__.__proto__)
+    const arr = [1,2,3,4,5,7,2,3,4,1]  // new Array ===[]
+    console.log(arr.__proto__ === Array.prototype)
+
+    Person.prototype.nationlity = 'Nigerian'
+
+    // var index =1
+    // for(index; index<=3;){
+    //     (function(update){
+    //         setTimeout(function(){
+    //             console.log(`after ${update} seconds ${update} seconds`)
+    //         }, index*1000)
+    //     })(index)
+    //     index++
+    // }
+
+    const account = {
+        owner : 'sheriffBaba',
+        movement: [200,300, 400, 500],
+        get latest(){
+            return this.movement.slice(-1).pop()
+        }
+    }
+    console.log(account.latest)
+
+    // Getter and Setter can be very useful for data validation
+    class Bio {
+        constructor(fullname, age){
+            this.fullname = fullname
+            this.age = age
+        }
+        // here the setter function and the constructor function are trying to set 
+        // the exact same property name
+        set fullname(name){
+            if(name.includes(' ')) this._fullname = name
+            else alert(`${name} is not a fullname!`)
+        }
+        get fullname(){
+            return this._fullname
+        }
+    }
+
+    const data1 = new Bio('sheriff lateef', 2020)
+    
+    // inheritance using constructor
+    function parent(firstname, lastname){
+        this.firstname = firstname
+        this.lastname = lastname
+    }
+
+    function child(firstname , lastname, level){
+        parent.call(this, firstname, lastname)
+        this.level = level
+    }
+    let student1 = new child('taiwo', 'lateef', 300)
+
+</script>
+</html>
