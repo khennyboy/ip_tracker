@@ -202,9 +202,10 @@ const account2 = {
       calcDisplaysummary(acc)
       
   }
-  //implementing login
+  //implementing login && fake login [to be modified later]
   let currentAccount, timer;
 
+  function name (){btnLogin.click()}
   btnLogin.addEventListener('click', function(e){
     e.preventDefault()
     currentAccount = accounts.find(acc=>acc.username ===inputLoginUsername.value)
@@ -219,7 +220,7 @@ const account2 = {
         // console.log(timer)
         // console.log(startLogOutUser())
         updateUi(currentAccount)
-        //implementing date
+        //implementing date(local)
       // const now = new Date()
       // const day = `${now.getDate()}`.padStart(2, 0)
       // const month = `${now.getMonth()+1}`.padStart(2, 0)
@@ -328,18 +329,18 @@ const tick = function(){
 
 
 // Fake always logged
-// currentAccount = account1;
-// updateUi(currentAccount)
-// containerApp.style.opacity = 10
-// const now = new Date()
-//       const options = {
-//         hour: 'numeric',
-//         minute: 'numeric',
-//         day: 'numeric',
-//         month: 'numeric',
-//         year:'numeric',
-//         // weekday: 'long'
-//       }
+currentAccount = account1;
+updateUi(currentAccount)
+containerApp.style.opacity = 10
+const now = new Date()
+      const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        day: 'numeric',
+        month: 'numeric',
+        year:'numeric',
+        // weekday: 'long'
+      }
 //       const locale = currentAccount.locale
 //       labelDate.textContent = new Intl.DateTimeFormat(locale,  options).format(now)
 //       labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
