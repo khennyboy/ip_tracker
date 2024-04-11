@@ -1,6 +1,6 @@
 // Importing module
 import * as allContent  from './shoppingCart.js'
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js'
+import cloneDeep from 'lodash-es'
 console.log('Importing module')
 
 allContent.addToCart('bread', 10)
@@ -9,15 +9,7 @@ allContent.addToCart('beans', 30)
 
 console.log(allContent.cart)
 
-// using json api to fetch data
-try{
-const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-const data = await res.json()
-console.log({title: data.at(-1).title, body: data.at(-1).body})
-}
-catch(err){
-    console.error(err.message)
-}
+
 let x = [{
     title:'html, css javascript',
     body: 'tailwindcss'
@@ -27,7 +19,7 @@ let x = [{
     body: 'tech bro'
 },
 {
-    title:'a front end web developer',
+    title:'a front end web developer, html, css ',
     body: 'i will be successful'
 }]
 console.log({title: x.at(-1).title, body: x.at(-1).body})
@@ -50,3 +42,6 @@ const deepClone = cloneDeep(state)
 console.log(deepClone)
 state.user.loggedIn = false
 
+if(module.hot){
+    module.hot.accept()
+}

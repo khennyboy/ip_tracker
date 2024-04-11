@@ -127,6 +127,75 @@
     }
     var x = name2.bind({firstname:'lateef'})
     console.log(x())
-   
+   // understanding regeenator function
+   const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(err)
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+getPosition().then(pos => console.log(pos)).catch(err=>console.error(err))
+function* generator(){
+    const data = yield 1
+    console.log(data)
+    yield 2
+    yield 3
+}
+const itearble = generator()
+console.log(itearble.next())
+console.log(itearble.next(2))
+console.log(itearble.next())
+
+
+
+function* counter() {
+  let count = 1;
+  while (true) {
+    yield count++;
+  }
+}
+
+const iterator = counter();
+console.log(iterator.next()); 
+console.log(iterator.next()); 
+console.log(iterator.next()); 
+
+
+function* fetchDataGenerator() {
+  const data1 = yield fetch('https://forkify-api.herokuapp.com/api/v2/recipes?search="pizza"&key=421ac505-0c9a-4baf-9fc7-d506ef70f7f3');
+  console.log(data1);
+  const data2 = yield fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc90b');
+  console.log(data2);
+  const data3 = yield fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc88c');
+  console.log(data3);
+}
+
+const iterator2 = fetchDataGenerator();
+const promise1 = iterator2.next().value;
+
+promise1.then((res)=>{
+    return res.json()
+}).then((data1)=>{
+    const promise1 = iterator2.next(data1).value // value for data1
+    return promise1
+}).then((res)=>{
+    console.log(res)
+    return res.json()
+}).then((data2)=>{
+    const promise2 = iterator2.next(data2).value // value for data2
+    return promise2
+}).then((res)=>{
+    return res.json()
+}).then((data3)=>{
+    const promise3 = iterator2.next(data3) // value for data3
+}).catch((err)=>console.error(err))
+
+
+
+
+
 </script>
 </html>

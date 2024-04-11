@@ -216,8 +216,8 @@ const account2 = {
         containerApp.style.opacity = 100
         if(timer) clearInterval(timer)
         timer = startLogOutUser()
-        console.log(timer)
-        console.log(startLogOutUser())
+        // console.log(timer)
+        // console.log(startLogOutUser())
         updateUi(currentAccount)
         //implementing date
       // const now = new Date()
@@ -255,14 +255,17 @@ btnTransfer.addEventListener('click', function(e){
   if(amount>0 && receiverAcc &&
      currentAccount.balance >=amount && 
      receiverAcc?.username!==currentAccount.username){
-      currentAccount.movements.push(-amount)
-      receiverAcc.movements.push(amount)
-      currentAccount.push(new Date().toISOString())
-      receiverAcc.push(new Date().toISOString())
-      updateUi(currentAccount)
+      setTimeout(function(){
+       currentAccount.movements.push(-amount)
+        receiverAcc.movements.push(amount)
+        currentAccount.push(new Date().toISOString())
+        receiverAcc.push(new Date().toISOString())
+        updateUi(currentAccount) 
+      }, 2500)
   }
   inputTransferAmount.value = inputTransferTo.value =''
-
+      clearInterval(timer);
+      timer = startLogOutUser();
 })
 
 btnClose.addEventListener('click', function(e){
@@ -274,6 +277,7 @@ btnClose.addEventListener('click', function(e){
     containerApp.style.opacity=0
   }
   inputCloseUsername.value = inputClosePin.value =''
+     
 })
 
 btnLoan.addEventListener('click', function(e){
@@ -287,6 +291,8 @@ btnLoan.addEventListener('click', function(e){
     }, 2500)
   }
   inputLoanAmount.value =''
+  clearInterval(timer);
+  timer = startLogOutUser();
 })
 
 let sorted = false
@@ -337,7 +343,8 @@ const tick = function(){
 //       const locale = currentAccount.locale
 //       labelDate.textContent = new Intl.DateTimeFormat(locale,  options).format(now)
 //       labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`
-
+//       if(timer) clearInterval(timer)
+//         timer = startLogOutUser()
 // formatting number
 // const num = 3884748.887;
 // const option = {

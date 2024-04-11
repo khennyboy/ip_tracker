@@ -10,6 +10,12 @@
 </body>
 
 <script>
+
+    // Four things that happened when a function is called with new keyword
+    //1. New {} is created
+    //2. function is called and this = {}
+    //3. {} is linked to prototype that creates it
+    //4. function authomatically return {}
     function Person(firstname, lastname){
         this.firstname = firstname
         this.lastname = lastname
@@ -17,7 +23,8 @@
 
     let candidate_1 = new Person('sheriff', 'baba')
 
-    console.dir(candidate_1.constructor)
+    console.log(candidate_1.constructor, 'constructor')
+
 
 //  When you define a constructor function in JavaScript, such as Person,
 // JavaScript automatically creates a prototype object for it.
@@ -85,6 +92,7 @@
         this.level = level
     }
     let student1 = new child('taiwo', 'lateef', 300)
+
 
 </script>
 </html>
